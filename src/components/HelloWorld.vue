@@ -46,7 +46,14 @@
       </div>
     </div>
     <div class="data">
-      {{treeData}}
+      <div v-for="(val,key) in treeData" :key="key">
+        <div class="dataChid">
+          <span>{{val.name}}</span>
+          <div class="dataChidItem" v-if="(val.treeNode == 1) && val.children.length !==0">
+            <div v-for="(chid,k) in val.children" :key="k">{{chid.name}}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -89,7 +96,7 @@ export default {
         evt.newIndex; // element's new index within new parent
         evt.clone; // the clone element
         evt.pullMode; // when item is in another sortable: `"clone"` if cloning, `true` if moving
-        console.log( evt.to,evt.from)
+        console.log(evt.to, evt.from);
       }
     });
   },
@@ -128,6 +135,16 @@ export default {
   color: #1f2329;
   margin: 50px auto;
   border: 1px solid #ccc;
+  /////////////////测试代码
+   .data{
+     .dataChid{
+       margin-left: 10px;
+     }
+     .dataChidItem{
+       margin-left: 10px;
+     }
+   }
+  //////////////////////
   #dragTree {
     ul,
     li,
